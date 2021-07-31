@@ -3,6 +3,7 @@
 namespace App\Services\User;
 
 use App\Repositories\User\UserRepository;
+use Exception;
 use Illuminate\Support\Facades\Log;
 
 class UserService
@@ -14,9 +15,27 @@ class UserService
         $this->userRepository = $userRepository;
     }
 
+    public function createStaff(array $staffData)
+    {
+        return $this->userRepository->create($staffData);
+    }
+
     public function getUsersByRole(string $role)
     {
-        return $this->userRepository->where('role', $role)->get();
+        switch($role) {
+            case 'patient':
+                return $this->userRepository->where('role', $role)->get();
+
+            case 'staff':
+                return $this->userRepository->where('role', 'admin')
+                ->orWhere('role', 'nurse')
+                ->orWhere('role', 'doctor')
+                ->get();
+
+            default:
+                throw new Exception('Role not recognized');
+
+        }
     }
 
     public function getAllUsers()

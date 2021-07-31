@@ -2048,7 +2048,10 @@ __webpack_require__.r(__webpack_exports__);
           type: 'error'
         });
       })["catch"](function (error) {
-        console.log('error', error);
+        return _this.$toast.open({
+          message: "Error, please try again.",
+          type: 'error'
+        });
       })["finally"](function () {});
     },
     resetDatatable: function resetDatatable() {
@@ -2095,6 +2098,216 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     disableSubmitPatientButton: function disableSubmitPatientButton() {
+      return false;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/StaffArea.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/StaffArea.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      staffs: [],
+      staffHolder: {
+        name: '',
+        email: '',
+        phone_number: '',
+        role: ''
+      }
+    };
+  },
+  methods: {
+    showAddStaffModal: function showAddStaffModal() {
+      $("#addStaffModal").modal('show');
+    },
+    clearAddStaffModal: function clearAddStaffModal() {
+      this.staffHolder.name = '';
+      this.staffHolder.email = '';
+      this.staffHolder.phone_number = '';
+      this.staffHolder.role = '';
+    },
+    submitStaff: function submitStaff() {
+      var _this = this;
+
+      axios.post('/api/user?role=staff', this.staffHolder).then(function (response) {
+        if (response.status === 201) {
+          _this.staffs.unshift(response.data);
+
+          _this.resetDatatable();
+
+          _this.clearAddStaffModal();
+
+          $("#addStaffModal").modal('hide');
+          return _this.$toast.open("Staff added successfully");
+        }
+
+        return _this.$toast.open({
+          message: "Error, please try again.",
+          type: 'error'
+        });
+      })["catch"](function (error) {
+        return _this.$toast.open({
+          message: "Error, please try again.",
+          type: 'error'
+        });
+      })["finally"](function () {});
+    },
+    resetDatatable: function resetDatatable() {
+      $('#staffTable').DataTable().destroy();
+      setTimeout(function () {
+        $('#staffTable').DataTable({
+          "order": false,
+          pageLength: 10,
+          lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'Everything']]
+        });
+      });
+    },
+    moment: function (_moment) {
+      function moment(_x) {
+        return _moment.apply(this, arguments);
+      }
+
+      moment.toString = function () {
+        return _moment.toString();
+      };
+
+      return moment;
+    }(function (date) {
+      return moment(date);
+    }),
+    getStaffs: function getStaffs() {
+      var _this2 = this;
+
+      axios.get('/api/user/?role=staff').then(function (response) {
+        _this2.staffs = response.data;
+      })["catch"](function (error) {
+        console.log('error', error);
+      })["finally"](function () {
+        $('#staffTable').DataTable({
+          "ordering": false,
+          pageLength: 10,
+          lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'Everything']]
+        });
+      });
+    }
+  },
+  created: function created() {
+    this.getStaffs();
+  },
+  computed: {
+    disableSubmitStaffButton: function disableSubmitStaffButton() {
       return false;
     }
   }
@@ -79943,6 +80156,432 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/StaffArea.vue?vue&type=template&id=42cfb332&":
+/*!************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/StaffArea.vue?vue&type=template&id=42cfb332& ***!
+  \************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "card" }, [
+      _c("div", { staticClass: "card-header" }, [
+        _c("div", { staticClass: "d-flex mb-3 justify-content-between" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary",
+                on: { click: _vm.showAddStaffModal }
+              },
+              [_vm._v("Add new staff")]
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _c(
+          "div",
+          {
+            staticClass: "dataTables_wrapper no-footer",
+            attrs: { id: "data-table_wrapper" }
+          },
+          [
+            _c(
+              "table",
+              {
+                staticClass: "table display table-hover text-center",
+                staticStyle: { width: "100%" },
+                attrs: { id: "usersTable" }
+              },
+              [
+                _vm._m(1),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.staffs, function(staff, index) {
+                    return _c(
+                      "tr",
+                      { key: index, staticClass: "order-number-clickable" },
+                      [
+                        _c("td", [_vm._v(_vm._s(staff.name))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(staff.email_address))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(staff.role))]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(
+                              _vm
+                                .moment(staff.created_at)
+                                .format("MMMM Do YYYY, h:mm:ss a")
+                            )
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(
+                              _vm
+                                .moment(staff.updated_at)
+                                .format("MMMM Do YYYY, h:mm:ss a")
+                            )
+                          )
+                        ])
+                      ]
+                    )
+                  }),
+                  0
+                )
+              ]
+            )
+          ]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade p-4",
+        attrs: {
+          id: "addStaffModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-md text-dark",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("form", [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", [_vm._v("Name")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.staffHolder.name,
+                          expression: "staffHolder.name"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "name",
+                        placeholder: "Type staff name"
+                      },
+                      domProps: { value: _vm.staffHolder.name },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.staffHolder, "name", $event.target.value)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", [_vm._v("Email")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.staffHolder.email,
+                          expression: "staffHolder.email"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "email",
+                        placeholder: "Type staff email"
+                      },
+                      domProps: { value: _vm.staffHolder.email },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.staffHolder,
+                            "email",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", [_vm._v("Phone Number")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.staffHolder.phone_number,
+                          expression: "staffHolder.phone_number"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "number",
+                        id: "phonenumber",
+                        placeholder: "Type patient phone number"
+                      },
+                      domProps: { value: _vm.staffHolder.phone_number },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.staffHolder,
+                            "phone_number",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { staticClass: "mr-2" }, [_vm._v("Role")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-check form-check-inline" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.staffHolder.role,
+                            expression: "staffHolder.role"
+                          }
+                        ],
+                        staticClass: "form-check-input",
+                        attrs: {
+                          value: "admin",
+                          type: "radio",
+                          name: "inlineRadioOptions",
+                          id: "inlineRadio1"
+                        },
+                        domProps: {
+                          checked: _vm._q(_vm.staffHolder.role, "admin")
+                        },
+                        on: {
+                          change: function($event) {
+                            return _vm.$set(_vm.staffHolder, "role", "admin")
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-check-label",
+                          attrs: { for: "inlineRadio1" }
+                        },
+                        [_vm._v("Admin")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-check form-check-inline" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.staffHolder.role,
+                            expression: "staffHolder.role"
+                          }
+                        ],
+                        staticClass: "form-check-input",
+                        attrs: {
+                          value: "doctor",
+                          type: "radio",
+                          name: "inlineRadioOptions",
+                          id: "inlineRadio2"
+                        },
+                        domProps: {
+                          checked: _vm._q(_vm.staffHolder.role, "doctor")
+                        },
+                        on: {
+                          change: function($event) {
+                            return _vm.$set(_vm.staffHolder, "role", "doctor")
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-check-label",
+                          attrs: { for: "inlineRadio2" }
+                        },
+                        [_vm._v("Doctor")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-check form-check-inline" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.staffHolder.role,
+                            expression: "staffHolder.role"
+                          }
+                        ],
+                        staticClass: "form-check-input",
+                        attrs: {
+                          value: "nurse",
+                          type: "radio",
+                          name: "inlineRadioOptions",
+                          id: "inlineRadio2"
+                        },
+                        domProps: {
+                          checked: _vm._q(_vm.staffHolder.role, "nurse")
+                        },
+                        on: {
+                          change: function($event) {
+                            return _vm.$set(_vm.staffHolder, "role", "nurse")
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-check-label",
+                          attrs: { for: "inlineRadio2" }
+                        },
+                        [_vm._v("Nurse")]
+                      )
+                    ])
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Close")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: {
+                      type: "button",
+                      disabled: _vm.disableSubmitStaffButton
+                    },
+                    on: { click: _vm.submitStaff }
+                  },
+                  [_vm._v("Submit")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [_c("h3", [_vm._v("Staff Area")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-light" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Email")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Role")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Date added")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Date updated")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [
+          _vm._v(
+            "\n                        Add Staff\n                        "
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js":
 /*!********************************************************************!*\
   !*** ./node_modules/vue-loader/lib/runtime/componentNormalizer.js ***!
@@ -92227,6 +92866,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('patients-view', __webpack_require__(/*! ./components/PatientsView.vue */ "./resources/js/components/PatientsView.vue")["default"]);
+Vue.component('staff-area', __webpack_require__(/*! ./components/StaffArea.vue */ "./resources/js/components/StaffArea.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -92367,6 +93007,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PatientsView_vue_vue_type_template_id_25027f84___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PatientsView_vue_vue_type_template_id_25027f84___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/StaffArea.vue":
+/*!***********************************************!*\
+  !*** ./resources/js/components/StaffArea.vue ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _StaffArea_vue_vue_type_template_id_42cfb332___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StaffArea.vue?vue&type=template&id=42cfb332& */ "./resources/js/components/StaffArea.vue?vue&type=template&id=42cfb332&");
+/* harmony import */ var _StaffArea_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StaffArea.vue?vue&type=script&lang=js& */ "./resources/js/components/StaffArea.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _StaffArea_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _StaffArea_vue_vue_type_template_id_42cfb332___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _StaffArea_vue_vue_type_template_id_42cfb332___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/StaffArea.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/StaffArea.vue?vue&type=script&lang=js&":
+/*!************************************************************************!*\
+  !*** ./resources/js/components/StaffArea.vue?vue&type=script&lang=js& ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StaffArea_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./StaffArea.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/StaffArea.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StaffArea_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/StaffArea.vue?vue&type=template&id=42cfb332&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/StaffArea.vue?vue&type=template&id=42cfb332& ***!
+  \******************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StaffArea_vue_vue_type_template_id_42cfb332___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./StaffArea.vue?vue&type=template&id=42cfb332& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/StaffArea.vue?vue&type=template&id=42cfb332&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StaffArea_vue_vue_type_template_id_42cfb332___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StaffArea_vue_vue_type_template_id_42cfb332___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

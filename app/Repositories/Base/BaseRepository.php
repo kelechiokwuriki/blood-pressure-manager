@@ -54,8 +54,15 @@ abstract class BaseRepository implements Repository
         return $this->model->where($column, $value);
     }
 
+    public function whereMultiple(array $whereArray)
+    {
+        return $this->model->where($whereArray);
+    }
+
     public function whereCompare($column, $comparison, $value)
     {
         return $this->model->where($column, $comparison, $value);
     }
+
+
 }

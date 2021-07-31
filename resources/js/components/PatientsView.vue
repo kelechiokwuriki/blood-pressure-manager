@@ -136,7 +136,10 @@
                         type: 'error',
                     });
                 }).catch(error => {
-                    console.log('error', error);
+                    return this.$toast.open({
+                        message: `Error, please try again.`,
+                        type: 'error',
+                    });
                 }).finally(() => {
                 })
             },

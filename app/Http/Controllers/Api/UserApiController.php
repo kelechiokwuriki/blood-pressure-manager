@@ -23,17 +23,23 @@ class UserApiController extends Controller
 
     public function index(Request $request)
     {
-        $role = $request->query('role');
+        try {
+            $role = $request->query('role');
+            $users = null;
 
-        $user = null;
+            if ($role) {
+                $users = $this->userService->getUsersByRole($role) ?
+                $this->userService->getUsersByRole($role) : $this->userService->getAllUsers();
+            }
 
-        if ($role) {
-            $users = $this->userService->getUsersByRole($role);
+            $users = UserResource::collection($users);
+
+            return response()->json($users, 200);
+
+        } catch (\Exception $e) {
+            Log::error("Unable to fetch users: ". $e->getMessage());
+            return response()->json('Failed fetching users', 400);
         }
-
-        $users = $this->userService->getAllUsers();
-
-        return UserResource::collection($users);
     }
 
     public function store(Request $request)
@@ -57,16 +63,22 @@ class UserApiController extends Controller
                     }
                 break;
 
+                case 'staff':
+                    $user = $this->userService->createStaff($request->all());
+                break;
+
                 default:
                     return response()->json(['error' => 'Unrecognized role'], 400);
                 break;
 
             }
+            $user = new UserResource($user);
 
             return response()->json($user, 201);
 
         } catch (\Exception $e) {
             Log::error("Unable to create user: ". $e->getMessage());
+            return response()->json('Failed creating user', 400);
         }
     }
 }
