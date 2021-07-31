@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\ObservationApiController;
+use App\Http\Controllers\Api\UserApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +18,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::get('/health-check', function() {
+    return true;
+});
+
+Route::group(['middleware' => ['auth:api']], function () {
+    Route::resource('user', 'Api\UserApiController');
+    Route::resource('observation', 'Api\ObservationApiController');
 });
