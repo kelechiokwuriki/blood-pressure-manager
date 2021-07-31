@@ -49,13 +49,12 @@ class UserApiController extends Controller
             switch($role) {
                 case 'patient':
                     $user = $this->userService->createPatient($request->all());
-
                     $data = $request->all();
-                    Log::debug($data);
-                    $observation = $data['observation'];
-                    $observation['user_id'] = $user->id;
 
-                    $this->observationService->createPatientObservation($observation);
+                    if (isset($data['observation'])) {
+                        $data['observation']['user_id'] = $user->id;
+                        $this->observationService->createPatientObservation($data['observation']);
+                    }
                 break;
 
                 default:

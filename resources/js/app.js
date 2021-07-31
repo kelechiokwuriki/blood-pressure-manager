@@ -28,6 +28,14 @@ Vue.component('patients-view', require('./components/PatientsView.vue').default)
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+ import VueToast from 'vue-toast-notification';
+ import 'vue-toast-notification/dist/theme-sugar.css';
+
+ Vue.use(VueToast, {
+    position: 'top-right',
+    duration: 3000
+})
+
 const app = new Vue({
     el: '#app',
 });

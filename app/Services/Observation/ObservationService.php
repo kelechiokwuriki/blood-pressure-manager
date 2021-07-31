@@ -2,6 +2,7 @@
 
 namespace App\Services\Observation;
 
+use App\Observation;
 use App\Repositories\Observation\ObservationRepository;
 
 class ObservationService
