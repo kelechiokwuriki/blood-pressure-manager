@@ -11,10 +11,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\User::class, 1000)->create()->each(function ($user) {
-            $user->role = 'patient';
-            $user->save();
-        });
+        // factory(App\User::class, 1000)->create()->each(function ($user) {
+        //     $user->role = 'patient';
+        //     $user->save();
+        // });
 
         // practice staff - admin 20
          factory(App\User::class, 25)->create()->each(function ($user) {
