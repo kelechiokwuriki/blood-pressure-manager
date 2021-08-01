@@ -15,6 +15,11 @@ class UserService
         $this->userRepository = $userRepository;
     }
 
+    public function getUserById($userId)
+    {
+        return $this->userRepository->find($userId);
+    }
+
     public function createStaff(array $staffData)
     {
         return $this->userRepository->create($staffData);

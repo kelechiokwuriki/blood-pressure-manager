@@ -24,7 +24,7 @@
                         </thead>
                         <tbody>
                             <tr v-for="(patient, index) in patients" v-bind:key="index" class="order-number-clickable" @click="showPatientDetails(patient.id)">
-                                <td>{{patient.name}}</td>
+                                <td><a :href="/user/ + patient.id">{{patient.name}}</a></td>
                                 <td>{{ moment(patient.created_at).format('MMMM Do YYYY, h:mm:ss a')}}</td>
                                 <td>{{ moment(patient.updated_at).format('MMMM Do YYYY, h:mm:ss a')}}</td>
                             </tr>
@@ -159,7 +159,7 @@
             },
             getPatients () {
                 axios.get('/api/user/?role=patient').then(response => {
-                    this.patients = response.data.data;
+                    this.patients = response.data;
                 }).catch(error => {
                     console.log('error', error);
                 }).finally(() => {

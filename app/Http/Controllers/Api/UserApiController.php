@@ -81,4 +81,17 @@ class UserApiController extends Controller
             return response()->json('Failed creating user', 400);
         }
     }
+
+    public function show($userId)
+    {
+        try {
+            $user = $this->userService->getUserById($userId);
+            $user = new UserResource($user);
+
+            return response()->json($user, 201);
+        } catch (\Exception $e) {
+            Log::error("Unable to fetch user: ". $e->getMessage());
+            return response()->json('Failed fetching user', 400);
+        }
+    }
 }

@@ -21,6 +21,8 @@ window.Vue = require('vue');
 
 Vue.component('patients-view', require('./components/PatientsView.vue').default);
 Vue.component('staff-area', require('./components/StaffArea.vue').default);
+Vue.component('single-patient', require('./components/SinglePatient.vue').default);
+
 
 
 /**
