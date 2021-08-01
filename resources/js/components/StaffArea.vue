@@ -15,7 +15,7 @@
             </div>
             <div class="card-body">
                 <div id="data-table_wrapper" class="dataTables_wrapper no-footer">
-                    <table id="usersTable" class="table display table-hover text-center" style="width:100%">
+                    <table id="staffTable" class="table display table-hover text-center" style="width:100%">
                         <thead class="thead-light">
                             <tr>
                                 <th scope="col">Name</th>

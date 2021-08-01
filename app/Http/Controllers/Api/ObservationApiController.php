@@ -15,22 +15,8 @@ class ObservationApiController extends Controller
         $this->observationService = $observationService;
     }
 
-    public function getPatientObservations(int $userId, Request $request)
+    public function store(Request $request)
     {
-        $type = $request->query('type');
-
-        switch ($type) {
-            case 'csv':
-                $this->observationService->exportObservationsAsCsv($userId);
-            break;
-
-            case 'pdf':
-                $this->observationService->exportobservationAsPdf($userId);
-            break;
-
-            default:
-                return $this->observationService->getUserObservations($userId);
-            break;
-        }
+        return $this->observationService->createPatientObservation($request->all());
     }
 }

@@ -2,9 +2,8 @@
 <div>
     <div class="row">
         <div class="offset-sm-6 col-sm-6">
-            <!-- <button class="btn btn-danger float-right" @click="exportPatientObservationAsCSv">Export observations as csv</button> -->
-            <a class="btn btn-danger float-right" target="__blank" href="/export-observation/csv" v-show="user.observations.length > 0">Export csv</a>
-
+            <button class="btn btn-primary mr-2 float-right" @click="showAddObservationModal">Add observation</button>
+            <a class="btn btn-danger float-right mr-2" target="__blank" href="/export-observation/csv" v-show="user.observations.length > 0">Export csv</a>
         </div>
     </div>
     <hr>
@@ -54,7 +53,7 @@
 
         </div>
             <!-- add observation modal -->
-            <div class="modal fade p-4" id="addPatientModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal fade p-4" id="addObservationModal" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-md text-dark" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -82,7 +81,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" :disabled="disableSubmitPatientButton" @click="submitPatient">Submit</button>
+                            <button type="button" class="btn btn-primary" :disabled="disableSubmitPatientButton" @click="submitObservation">Submit</button>
                         </div>
                         </div>
                     </div>
@@ -99,6 +98,7 @@
             return {
                 user: {},
                 observation: {
+                    user_id: this.userid,
                     notes: '',
                     reading: ''
                 }
@@ -108,29 +108,15 @@
             userid: Number
         },
         methods: {
-            exportPatientObservationAsCSv() {
-                axios.get(`/api/user/${this.user.id}/observation/?type=csv`).then(response => {
-                    console.log(response.data);
-                }).catch(error => {
-                    console.log(error);
-                })
-            },
-            showAddPatientModal() {
-                $("#addPatientModal").modal('show');
-            },
-            clearAddPatientModal() {
-                this.observation.notes = '';
-                this.observation.reading = '';
-            },
-            submitPatient() {
-                axios.post('/api/user?role=patient', this.patientHolder).then(response => {
+            submitObservation() {
+                axios.post('/api/observation', this.observation).then(response => {
                     if (response.status === 201) {
-                        this.patients.unshift(response.data);
-                        this.resetDatatable();
-                        this.clearAddPatientModal();
-                        $("#addPatientModal").modal('hide');
+                        this.user.observations.unshift(response.data);
+                        this.clearAddObservationModal();
 
-                        return this.$toast.open(`Patient added successfully`);
+                        $("#addObservationModal").modal('hide');
+
+                        return this.$toast.open(`Observation added successfully`);
                     }
 
                     return this.$toast.open({
@@ -142,19 +128,21 @@
                         message: `Error, please try again.`,
                         type: 'error',
                     });
-                }).finally(() => {
                 })
             },
-            resetDatatable() {
-                $('#patientsTable').DataTable().destroy();
-
-                setTimeout(function() {
-                    $('#patientsTable').DataTable({
-                        "order": false,
-                        pageLength: 10,
-                        lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'Everything']]
-                    });
-                });
+            showAddObservationModal() {
+                $('#addObservationModal').modal('show');
+            },
+            exportPatientObservationAsCSv() {
+                axios.get(`/api/user/${this.user.id}/observation/?type=csv`).then(response => {
+                    console.log(response.data);
+                }).catch(error => {
+                    console.log(error);
+                })
+            },
+            clearAddObservationModal() {
+                this.observation.notes = '';
+                this.observation.reading = '';
             },
             moment(date) {
                 return moment(date);

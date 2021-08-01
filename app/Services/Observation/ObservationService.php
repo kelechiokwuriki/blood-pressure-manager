@@ -24,15 +24,6 @@ class ObservationService
         return $this->observationRepository->create($observation);
     }
 
-    public function exportObservationsAsCsv(int $userId)
-    {
-        return Excel::download(new ObservationsExport, 'observations.xlsx');
-
-        // $user = $this->userRepository->find($userId);
-
-        // $observations = $this->observationRepository->where('user_id', $userId);
-    }
-
     public function getUserObservations(int $userId)
     {
         return $this->observationRepository->where('user_id', $userId)->get();

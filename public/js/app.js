@@ -2208,12 +2208,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       user: {},
       observation: {
+        user_id: this.userid,
         notes: '',
         reading: ''
       }
@@ -2223,33 +2223,17 @@ __webpack_require__.r(__webpack_exports__);
     userid: Number
   },
   methods: {
-    exportPatientObservationAsCSv: function exportPatientObservationAsCSv() {
-      axios.get("/api/user/".concat(this.user.id, "/observation/?type=csv")).then(function (response) {
-        console.log(response.data);
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    showAddPatientModal: function showAddPatientModal() {
-      $("#addPatientModal").modal('show');
-    },
-    clearAddPatientModal: function clearAddPatientModal() {
-      this.observation.notes = '';
-      this.observation.reading = '';
-    },
-    submitPatient: function submitPatient() {
+    submitObservation: function submitObservation() {
       var _this = this;
 
-      axios.post('/api/user?role=patient', this.patientHolder).then(function (response) {
+      axios.post('/api/observation', this.observation).then(function (response) {
         if (response.status === 201) {
-          _this.patients.unshift(response.data);
+          _this.user.observations.unshift(response.data);
 
-          _this.resetDatatable();
+          _this.clearAddObservationModal();
 
-          _this.clearAddPatientModal();
-
-          $("#addPatientModal").modal('hide');
-          return _this.$toast.open("Patient added successfully");
+          $("#addObservationModal").modal('hide');
+          return _this.$toast.open("Observation added successfully");
         }
 
         return _this.$toast.open({
@@ -2261,17 +2245,21 @@ __webpack_require__.r(__webpack_exports__);
           message: "Error, please try again.",
           type: 'error'
         });
-      })["finally"](function () {});
-    },
-    resetDatatable: function resetDatatable() {
-      $('#patientsTable').DataTable().destroy();
-      setTimeout(function () {
-        $('#patientsTable').DataTable({
-          "order": false,
-          pageLength: 10,
-          lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'Everything']]
-        });
       });
+    },
+    showAddObservationModal: function showAddObservationModal() {
+      $('#addObservationModal').modal('show');
+    },
+    exportPatientObservationAsCSv: function exportPatientObservationAsCSv() {
+      axios.get("/api/user/".concat(this.user.id, "/observation/?type=csv")).then(function (response) {
+        console.log(response.data);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    clearAddObservationModal: function clearAddObservationModal() {
+      this.observation.notes = '';
+      this.observation.reading = '';
     },
     moment: function (_moment) {
       function moment(_x) {
@@ -80383,6 +80371,15 @@ var render = function() {
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "offset-sm-6 col-sm-6" }, [
         _c(
+          "button",
+          {
+            staticClass: "btn btn-primary mr-2 float-right",
+            on: { click: _vm.showAddObservationModal }
+          },
+          [_vm._v("Add observation")]
+        ),
+        _vm._v(" "),
+        _c(
           "a",
           {
             directives: [
@@ -80393,7 +80390,7 @@ var render = function() {
                 expression: "user.observations.length > 0"
               }
             ],
-            staticClass: "btn btn-danger float-right",
+            staticClass: "btn btn-danger float-right mr-2",
             attrs: { target: "__blank", href: "/export-observation/csv" }
           },
           [_vm._v("Export csv")]
@@ -80478,7 +80475,7 @@ var render = function() {
         {
           staticClass: "modal fade p-4",
           attrs: {
-            id: "addPatientModal",
+            id: "addObservationModal",
             tabindex: "-1",
             role: "dialog",
             "aria-hidden": "true"
@@ -80585,7 +80582,7 @@ var render = function() {
                         type: "button",
                         disabled: _vm.disableSubmitPatientButton
                       },
-                      on: { click: _vm.submitPatient }
+                      on: { click: _vm.submitObservation }
                     },
                     [_vm._v("Submit")]
                   )
@@ -80703,7 +80700,7 @@ var render = function() {
               {
                 staticClass: "table display table-hover text-center",
                 staticStyle: { width: "100%" },
-                attrs: { id: "usersTable" }
+                attrs: { id: "staffTable" }
               },
               [
                 _vm._m(1),
