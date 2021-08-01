@@ -2,7 +2,9 @@
 <div>
     <div class="row">
         <div class="offset-sm-6 col-sm-6">
-            <button class="btn btn-danger float-right" @click="exportPatientObservationAsCSv">Export observations as csv</button>
+            <!-- <button class="btn btn-danger float-right" @click="exportPatientObservationAsCSv">Export observations as csv</button> -->
+            <a class="btn btn-danger float-right" target="__blank" href="/export-observation/csv">Export csv</a>
+
         </div>
     </div>
     <hr>
@@ -107,7 +109,7 @@
         },
         methods: {
             exportPatientObservationAsCSv() {
-                axios.get(`/api/user/${user.id}/observation/?type=csv`).then(response => {
+                axios.get(`/api/user/${this.user.id}/observation/?type=csv`).then(response => {
                     console.log(response.data);
                 }).catch(error => {
                     console.log(error);

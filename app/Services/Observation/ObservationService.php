@@ -2,9 +2,11 @@
 
 namespace App\Services\Observation;
 
+use App\Exports\ObservationsExport;
 use App\Observation;
 use App\Repositories\Observation\ObservationRepository;
 use App\Repositories\User\UserRepository;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ObservationService
 {
@@ -24,9 +26,11 @@ class ObservationService
 
     public function exportObservationsAsCsv(int $userId)
     {
-        $user = $this->userRepository->find($userId);
+        return Excel::download(new ObservationsExport, 'observations.xlsx');
 
-        $observations = $this->observationRepository->where('user_id', $userId);
+        // $user = $this->userRepository->find($userId);
+
+        // $observations = $this->observationRepository->where('user_id', $userId);
     }
 
     public function getUserObservations(int $userId)

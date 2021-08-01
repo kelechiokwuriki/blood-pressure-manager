@@ -2207,6 +2207,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2222,7 +2224,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     exportPatientObservationAsCSv: function exportPatientObservationAsCSv() {
-      axios.get("/api/user/".concat(user.id, "/observation/?type=csv")).then(function (response) {
+      axios.get("/api/user/".concat(this.user.id, "/observation/?type=csv")).then(function (response) {
         console.log(response.data);
       })["catch"](function (error) {
         console.log(error);
@@ -80377,18 +80379,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "offset-sm-6 col-sm-6" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-danger float-right",
-            on: { click: _vm.exportPatientObservationAsCSv }
-          },
-          [_vm._v("Export observations as csv")]
-        )
-      ])
-    ]),
+    _vm._m(0),
     _vm._v(" "),
     _c("hr"),
     _vm._v(" "),
@@ -80397,7 +80388,7 @@ var render = function() {
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-header" }, [
             _c("div", { staticClass: "d-flex justify-content-between" }, [
-              _vm._m(0),
+              _vm._m(1),
               _vm._v(" "),
               _c("div", [
                 _vm._v(
@@ -80475,7 +80466,7 @@ var render = function() {
             },
             [
               _c("div", { staticClass: "modal-content" }, [
-                _vm._m(1),
+                _vm._m(2),
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-body" }, [
                   _c("form", [
@@ -80581,6 +80572,23 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "offset-sm-6 col-sm-6" }, [
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-danger float-right",
+            attrs: { target: "__blank", href: "/export-observation/csv" }
+          },
+          [_vm._v("Export csv")]
+        )
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
