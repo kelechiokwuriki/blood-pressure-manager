@@ -23,9 +23,4 @@ class ObservationService
     {
         return $this->observationRepository->create($observation);
     }
-
-    public function getUserObservations(int $userId)
-    {
-        return $this->observationRepository->where('user_id', $userId)->get();
-    }
 }
