@@ -25,6 +25,7 @@ Route::get('/health-check', function() {
 });
 
 Route::group(['middleware' => ['auth:api']], function () {
+    Route::get('user/{userId}/observation', 'Api\ObservationApiController@getPatientObservations');
     Route::resource('user', 'Api\UserApiController');
     Route::resource('observation', 'Api\ObservationApiController');
 });

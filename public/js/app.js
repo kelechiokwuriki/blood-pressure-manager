@@ -2183,6 +2183,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2197,6 +2221,13 @@ __webpack_require__.r(__webpack_exports__);
     userid: Number
   },
   methods: {
+    exportPatientObservationAsCSv: function exportPatientObservationAsCSv() {
+      axios.get("/api/user/".concat(user.id, "/observation/?type=csv")).then(function (response) {
+        console.log(response.data);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
     showAddPatientModal: function showAddPatientModal() {
       $("#addPatientModal").modal('show');
     },
@@ -80345,133 +80376,208 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row" }, [
-    _vm._m(0),
-    _vm._v(" "),
-    _vm._m(1),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal fade p-4",
-        attrs: {
-          id: "addPatientModal",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-hidden": "true"
-        }
-      },
-      [
+  return _c("div", [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "offset-sm-6 col-sm-6" }, [
         _c(
-          "div",
+          "button",
           {
-            staticClass: "modal-dialog modal-md text-dark",
-            attrs: { role: "document" }
+            staticClass: "btn btn-danger float-right",
+            on: { click: _vm.exportPatientObservationAsCSv }
           },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(2),
+          [_vm._v("Export observations as csv")]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-sm-5" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-header" }, [
+            _c("div", { staticClass: "d-flex justify-content-between" }, [
+              _vm._m(0),
               _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("form", [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", [_vm._v("Reading")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.observation.reading,
-                          expression: "observation.reading"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "text",
-                        id: "name",
-                        placeholder: "Type patient name"
-                      },
-                      domProps: { value: _vm.observation.reading },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.observation,
-                            "reading",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", [_vm._v("Notes")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.observation.notes,
-                          expression: "observation.notes"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "text",
-                        id: "email",
-                        placeholder: "Type patient email"
-                      },
-                      domProps: { value: _vm.observation.notes },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.observation,
-                            "notes",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    })
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-secondary",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_vm._v("Close")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: {
-                      type: "button",
-                      disabled: _vm.disableSubmitPatientButton
-                    },
-                    on: { click: _vm.submitPatient }
-                  },
-                  [_vm._v("Submit")]
+              _c("div", [
+                _vm._v(
+                  "\n                                Added on " +
+                    _vm._s(
+                      _vm
+                        .moment(_vm.user.created_at)
+                        .format("MMMM Do YYYY, h:mm:ss a")
+                    ) +
+                    "\n                            "
                 )
               ])
             ])
-          ]
-        )
-      ]
-    )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("p", [_vm._v("Name: " + _vm._s(_vm.user.name))]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v("Email address: " + _vm._s(_vm.user.email_address))
+            ]),
+            _vm._v(" "),
+            _c("p", [_vm._v("Phone number: " + _vm._s(_vm.user.phone_number))])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "col-sm-7" },
+        _vm._l(_vm.user.observations, function(observation) {
+          return _c("div", { key: observation.id, staticClass: "card" }, [
+            _c("div", { staticClass: "card-header" }, [
+              _c("h5", { staticClass: "card-title" }, [
+                _vm._v(
+                  "Observation carried out on " +
+                    _vm._s(
+                      _vm
+                        .moment(_vm.user.created_at)
+                        .format("MMMM Do YYYY, h:mm:ss a")
+                    )
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _c("p", [
+                _vm._v("Reading (mmHg): " + _vm._s(observation.reading))
+              ]),
+              _vm._v(" "),
+              _c("p", [_vm._v("Notes: " + _vm._s(observation.notes))])
+            ])
+          ])
+        }),
+        0
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade p-4",
+          attrs: {
+            id: "addPatientModal",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "modal-dialog modal-md text-dark",
+              attrs: { role: "document" }
+            },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _c("form", [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", [_vm._v("Reading")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.observation.reading,
+                            expression: "observation.reading"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "name",
+                          placeholder: "Type patient name"
+                        },
+                        domProps: { value: _vm.observation.reading },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.observation,
+                              "reading",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", [_vm._v("Notes")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.observation.notes,
+                            expression: "observation.notes"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "email",
+                          placeholder: "Type patient email"
+                        },
+                        domProps: { value: _vm.observation.notes },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.observation,
+                              "notes",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-secondary",
+                      attrs: { type: "button", "data-dismiss": "modal" }
+                    },
+                    [_vm._v("Close")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: {
+                        type: "button",
+                        disabled: _vm.disableSubmitPatientButton
+                      },
+                      on: { click: _vm.submitPatient }
+                    },
+                    [_vm._v("Submit")]
+                  )
+                ])
+              ])
+            ]
+          )
+        ]
+      )
+    ])
   ])
 }
 var staticRenderFns = [
@@ -80479,31 +80585,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-sm-6" }, [
-      _c("div", { staticClass: "card" }, [
-        _c("div", { staticClass: "card-header" }, [
-          _c("h5", { staticClass: "card-title" }, [
-            _vm._v(
-              "\n                            Patient Information\n                        "
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-sm-6" }, [
-      _c("div", { staticClass: "card" }, [
-        _c("div", { staticClass: "card-header" }, [
-          _c("h5", { staticClass: "card-title" }, [_vm._v("Observations")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body" })
+    return _c("div", [
+      _c("h5", { staticClass: "card-title" }, [
+        _vm._v(
+          "\n                                    Patient Information\n                                "
+        )
       ])
     ])
   },
@@ -80517,7 +80603,7 @@ var staticRenderFns = [
         { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
         [
           _vm._v(
-            "\n                        Add observation for patient\n                        "
+            "\n                            Add observation for patient\n                            "
           )
         ]
       ),
