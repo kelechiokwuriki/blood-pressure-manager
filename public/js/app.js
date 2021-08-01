@@ -2419,6 +2419,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -80662,10 +80663,19 @@ var render = function() {
             _c(
               "button",
               {
-                staticClass: "btn btn-primary",
+                staticClass: "btn btn-primary mr-2",
                 on: { click: _vm.showAddStaffModal }
               },
               [_vm._v("Add new staff")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-danger float-right",
+                attrs: { target: "__blank", href: "/export-staffs/csv" }
+              },
+              [_vm._v("Export csv")]
             )
           ])
         ])

@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class ExportObservation
+class ExportStaffs
 {
     /**
      * Handle an incoming request.
@@ -15,9 +15,10 @@ class ExportObservation
      */
     public function handle($request, Closure $next)
     {
-        if (auth()->user()->role !== 'admin' || auth()->user()->role !== 'doctor') {
-            return back()->with('status', 'Only admins and doctors can export.');
+        if (auth()->user()->role !== 'admin') {
+            return back()->with('status', 'Only admins can export.');
         }
+
         return $next($request);
     }
 }

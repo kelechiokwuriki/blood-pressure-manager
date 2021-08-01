@@ -8,7 +8,8 @@
                         <h3>Staff Area</h3>
                     </div>
                     <div>
-                        <button class="btn btn-primary" @click="showAddStaffModal">Add new staff</button>
+                        <button class="btn btn-primary mr-2" @click="showAddStaffModal">Add new staff</button>
+                        <a class="btn btn-danger float-right" target="__blank" href="/export-staffs/csv">Export csv</a>
                     </div>
                 </div>
             </div>

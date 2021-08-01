@@ -26,4 +26,6 @@ Route::resource('user', 'UserController');
 
 
 Route::get('/export-observation/{exportType}', 'UserController@exportObservation')->middleware('exportobservation');
+Route::get('/export-staffs/{exportType}', 'UserController@exportStaffs')->middleware('exportstaffs');
+
 
