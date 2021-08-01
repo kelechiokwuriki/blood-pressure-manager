@@ -11,6 +11,27 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UserSeeder::class);
+        factory(App\User::class, 1000)->create()->each(function ($user) {
+            $user->role = 'patient';
+            $user->save();
+        });
+
+        // practice staff - admin 20
+         factory(App\User::class, 25)->create()->each(function ($user) {
+            $user->role = 'admin';
+            $user->save();
+        });
+
+         // practice staff - admin 15
+         factory(App\User::class, 25)->create()->each(function ($user) {
+            $user->role = 'nurse';
+            $user->save();
+        });
+
+         // practice staff - admin 15
+         factory(App\User::class, 25)->create()->each(function ($user) {
+            $user->role = 'doctor';
+            $user->save();
+        });
     }
 }
