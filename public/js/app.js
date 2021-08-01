@@ -80380,7 +80380,26 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm._m(0),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "offset-sm-6 col-sm-6" }, [
+        _c(
+          "a",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.user.observations.length > 0,
+                expression: "user.observations.length > 0"
+              }
+            ],
+            staticClass: "btn btn-danger float-right",
+            attrs: { target: "__blank", href: "/export-observation/csv" }
+          },
+          [_vm._v("Export csv")]
+        )
+      ])
+    ]),
     _vm._v(" "),
     _c("hr"),
     _vm._v(" "),
@@ -80389,7 +80408,7 @@ var render = function() {
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-header" }, [
             _c("div", { staticClass: "d-flex justify-content-between" }, [
-              _vm._m(1),
+              _vm._m(0),
               _vm._v(" "),
               _c("div", [
                 _vm._v(
@@ -80417,35 +80436,42 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col-sm-7" },
-        _vm._l(_vm.user.observations, function(observation) {
-          return _c("div", { key: observation.id, staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _c("h5", { staticClass: "card-title" }, [
-                _vm._v(
-                  "Observation carried out on " +
-                    _vm._s(
-                      _vm
-                        .moment(_vm.user.created_at)
-                        .format("MMMM Do YYYY, h:mm:ss a")
-                    )
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _c("p", [
-                _vm._v("Reading (mmHg): " + _vm._s(observation.reading))
-              ]),
-              _vm._v(" "),
-              _c("p", [_vm._v("Notes: " + _vm._s(observation.notes))])
+      _c("div", { staticClass: "col-sm-7" }, [
+        _vm.user.observations.length > 0
+          ? _c(
+              "div",
+              _vm._l(_vm.user.observations, function(observation) {
+                return _c("div", { key: observation.id, staticClass: "card" }, [
+                  _c("div", { staticClass: "card-header" }, [
+                    _c("h5", { staticClass: "card-title" }, [
+                      _vm._v(
+                        "Observation carried out on " +
+                          _vm._s(
+                            _vm
+                              .moment(_vm.user.created_at)
+                              .format("MMMM Do YYYY, h:mm:ss a")
+                          )
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "card-body" }, [
+                    _c("p", [
+                      _vm._v("Reading (mmHg): " + _vm._s(observation.reading))
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [_vm._v("Notes: " + _vm._s(observation.notes))])
+                  ])
+                ])
+              }),
+              0
+            )
+          : _c("div", [
+              _vm._v(
+                "\n                No observations for patient.\n            "
+              )
             ])
-          ])
-        }),
-        0
-      ),
+      ]),
       _vm._v(" "),
       _c(
         "div",
@@ -80467,7 +80493,7 @@ var render = function() {
             },
             [
               _c("div", { staticClass: "modal-content" }, [
-                _vm._m(2),
+                _vm._m(1),
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-body" }, [
                   _c("form", [
@@ -80573,23 +80599,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "offset-sm-6 col-sm-6" }, [
-        _c(
-          "a",
-          {
-            staticClass: "btn btn-danger float-right",
-            attrs: { target: "__blank", href: "/export-observation/csv" }
-          },
-          [_vm._v("Export csv")]
-        )
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

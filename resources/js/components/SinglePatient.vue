@@ -3,7 +3,7 @@
     <div class="row">
         <div class="offset-sm-6 col-sm-6">
             <!-- <button class="btn btn-danger float-right" @click="exportPatientObservationAsCSv">Export observations as csv</button> -->
-            <a class="btn btn-danger float-right" target="__blank" href="/export-observation/csv">Export csv</a>
+            <a class="btn btn-danger float-right" target="__blank" href="/export-observation/csv" v-show="user.observations.length > 0">Export csv</a>
 
         </div>
     </div>
@@ -35,22 +35,22 @@
 
         </div>
         <div class="col-sm-7">
-
-            <!-- <form>
-                <input type="text" class="form-control" id="name"
-                                        placeholder="Type patient name">
-            </form> -->
-            <!-- single patient info -->
-            <div class="card" v-for="observation in user.observations" v-bind:key="observation.id">
-                <div class="card-header">
-                        <h5 class="card-title">Observation carried out on {{moment(user.created_at).format('MMMM Do YYYY, h:mm:ss a')}}</h5>
-                </div>
-                <div class="card-body">
-                    <p>Reading (mmHg): {{observation.reading}}</p>
-                    <p>Notes: {{observation.notes}}</p>
+            <!-- single patient observations info -->
+            <div v-if="user.observations.length > 0">
+                <div class="card" v-for="observation in user.observations" v-bind:key="observation.id">
+                    <div class="card-header">
+                            <h5 class="card-title">Observation carried out on {{moment(user.created_at).format('MMMM Do YYYY, h:mm:ss a')}}</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Reading (mmHg): {{observation.reading}}</p>
+                        <p>Notes: {{observation.notes}}</p>
+                    </div>
                 </div>
             </div>
-            <!--end single patient info-->
+            <div v-else>
+                No observations for patient.
+            </div>
+            <!--end single patient observations info-->
 
         </div>
             <!-- add observation modal -->
