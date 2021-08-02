@@ -12,6 +12,7 @@ use App\Services\User\UserService;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Tests\TestCase;
 use Illuminate\Support\Str;
 
@@ -89,5 +90,9 @@ class UserServiceTest extends TestCase
         $this->assertEquals($staff->role, $role);
     }
 
-
+    public function testGetAllUsers()
+    {
+        $users = $this->userService->getAllUsers();
+        $this->assertNotEmpty($users);
+    }
 }
