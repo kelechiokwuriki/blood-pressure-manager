@@ -72,5 +72,22 @@ class UserServiceTest extends TestCase
         $this->assertEquals($user->id, $this->adminUser->id);
     }
 
+    public function testCreateStaff()
+    {
+        $user = $this->userService->createStaff($this->staffData);
+        $this->assertNotEmpty($user);
+    }
+
+    public function testGetUserByRole()
+    {
+        $role = 'patient';
+        $patient = $this->userService->createPatient($this->patientData);
+        $this->assertEquals($patient->role, $role);
+
+        $role = 'doctor';
+        $staff = $this->userService->createPatient($this->staffData);
+        $this->assertEquals($staff->role, $role);
+    }
+
 
 }
