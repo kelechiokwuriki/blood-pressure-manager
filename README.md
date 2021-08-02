@@ -9,3 +9,6 @@ Run the following commands:
 
 
 Navigate to the url on your browser.
+
+## Run tests
+php artisan test
